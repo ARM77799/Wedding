@@ -16,19 +16,48 @@
       padding: 2rem;
       backdrop-filter: brightness(50%);
     }
+
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 3.5rem;
       color: #d4af37;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      opacity: 0;
+      animation: slideUp 1.2s ease-out forwards;
     }
+
     .fade-in {
       animation: fadeIn 2s ease-in;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-slide-up {
+      animation: slideUp 1.2s ease-out forwards;
+    }
+
+    .animate-zoom-in {
+      animation: zoomIn 1s ease-out forwards;
+    }
+
     .content {
       background-color: rgba(255, 255, 255, 0.9);
       color: #333;
@@ -38,20 +67,24 @@
       margin: auto;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
+
     .section {
       margin-bottom: 2rem;
     }
+
     .image-container {
       margin-bottom: 1.5rem;
       position: relative;
     }
+
     .image-container img {
       width: 100%;
-      height: 300px;
+      height: auto;
       object-fit: cover;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+
     .caption {
       position: absolute;
       bottom: 10px;
@@ -64,6 +97,7 @@
       padding: 5px 0;
       text-align: center;
     }
+
     .calendar {
       display: grid;
       grid-template-columns: repeat(7, 50px);
@@ -71,6 +105,7 @@
       justify-content: center;
       margin-top: 20px;
     }
+
     .day {
       width: 50px;
       height: 50px;
@@ -80,9 +115,13 @@
       font-weight: bold;
       font-size: 1.1rem;
       color: #5a4b2b;
-      position: relative;
       background-color: transparent;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: popIn 0.5s ease-out forwards;
+      animation-delay: calc(var(--i) * 0.03s);
     }
+
     .day.heart-day {
       background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
       background-size: cover;
@@ -91,9 +130,11 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
       opacity: 0.85;
     }
+
     .day.empty {
       visibility: hidden;
     }
+
     .weekdays {
       display: grid;
       grid-template-columns: repeat(7, 50px);
@@ -103,9 +144,64 @@
       margin-bottom: 10px;
       color: #6a5d35;
     }
+
+    .share-icons a {
+      margin: 0 10px;
+      display: inline-block;
+    }
+
+    .share-icons img {
+      width: 48px;
+      height: 48px;
+    }
+
+    /* Մոբայլի համար */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .content {
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .section p {
+        font-size: 0.95rem;
+        animation: slideUp 1s ease-out forwards;
+      }
+
+      .caption {
+        font-size: 0.9rem;
+        padding: 3px 0;
+      }
+
+      .calendar, .weekdays {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+      }
+
+      .day, .weekdays div {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        font-size: 0.9rem;
+      }
+
+      .share-icons img {
+        width: 36px;
+        height: 36px;
+      }
+    }
   </style>
 </head>
 <body class="fade-in">
+
   <audio autoplay loop>
     <source src="https://dl.dropbox.com/scl/fi/ptv0fwqccbz18twml084r/Beyonc-Halo-lyrics-1-mp3cut.net.mp3?rlkey=huo424g54zzfdnnp2iy8el4ui&st=re295bxw&dl=0" type="audio/mpeg">
     Ձեր բրաուզերը չի աջակցում աուդիո նվագարկման։
@@ -115,19 +211,20 @@
     <h1>Հայկ և Սյուզան</h1>
 
     <div class="section">
-      <p>Երբ սրտերը միավորվում են սիրով, ծաղկում է հավերժություն։</p>
-      <p>Սերը՝ այն միակ ճանապարհն է, որի վրա երջանկությունը քայլում է ձեռք ձեռքի տված։</p>
-      <p><em>«Սերը ոչ թե այն է, ինչ տեսնում ենք, այլ այն, ինչ զգում ենք» — Վիլյամ Սարոյան</em></p>
-      <p>Սիրով հրավիրում ենք Ձեզ ներկա լինելու մեր կյանքի ամենագեղեցիկ օրը։</p>
+      <p class="animate-slide-up" style="animation-delay: 0.2s;">Երբ սրտերը միավորվում են սիրով, ծաղկում է հավերժություն։</p>
+      <p class="animate-slide-up" style="animation-delay: 0.4s;">Սերը՝ այն միակ ճանապարհն է, որի վրա երջանկությունը քայլում է ձեռք ձեռքի տված։</p>
+      <p class="animate-slide-up" style="animation-delay: 0.6s;"><em>«Սերը ոչ թե այն է, ինչ տեսնում ենք, այլ այն, ինչ զգում ենք» — Վիլյամ Սարոյան</em></p>
+      <p class="animate-slide-up" style="animation-delay: 0.8s;">Սիրով հրավիրում ենք Ձեզ ներկա լինելու մեր կյանքի ամենագեղեցիկ օրը։</p>
     </div>
 
-    <div class="section image-container">
+    <div class="section image-container animate-zoom-in">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe0z3i85AIzbtZaj8cBx_EAfiLnbZ6H9A_ry1vOnD4E0xvWB9bHcjnhAo6oU9UBcxiGHM&usqp=CAU" alt="Հայկ և Սյուզան">
       <div class="caption">Հայկ և Սյուզան</div>
     </div>
 
-    <div class="section image-container">
+    <div class="section image-container animate-zoom-in">
       <img src="https://www.shutterstock.com/image-photo/panoramic-view-ancient-stone-church-600nw-2038670873.jpg" alt="Սուրբ Հռիփսիմե եկեղեցի">
+     
       <div class="caption">
         Կրոնական արարողություն — 15:40,<br>
         <a href="https://goo.gl/maps/EtkZKDj7ebUjCMra9" target="_blank">Սուրբ Հռիփսիմե եկեղեցի</a><br>
@@ -135,8 +232,8 @@
       </div>
     </div>
 
-    <div class="section image-container">
-      <img src="https://scontent.fevn7-1.fna.fbcdn.net/v/t39.30808-6/476842353_1993753337768495_5476743582948099647_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=oD1daazgWRIQ7kNvwGkuXN9&_nc_oc=AdlYbNW4l7Chie1-D3WcUota8jSjpPorXe5opmNit4u9HVaQoILwfXdIt9IrQQE2Rlg&_nc_zt=23&_nc_ht=scontent.fevn7-1.fna&_nc_gid=ArZgivZJc3aozBIuj-NJKQ&oh=00_AfJ1u8oEnGugkH46WoTMziU8UELUMuhsCiE5VrxvbHFSKw&oe=68278B66" alt="Morena Hall">
+    <div class="section image-container animate-zoom-in">
+      <img src="https://scontent.fevn4-2.fna.fbcdn.net/v/t39.30808-6/481328157_2004137833396712_8972126987627680121_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3a1ebe&_nc_ohc=qg4RKujKBQQQ7kNvwFf6mok&_nc_oc=AdmtblsI3lFaJbxgZQvVS0BJPd8Xh9tUL4_-DTfGoZNc1Qf2BgWAUk7AfsUM0Cxr7Os&_nc_zt=23&_nc_ht=scontent.fevn4-2.fna&_nc_gid=nUXN5uwaJVDNfNRXBQC0FA&oh=00_AfIRmxnmZt0-oW-k1keUMx4UfUQ1fPq1llK1xE45VTEb_A&oe=683B671E" alt="Morena Hall">
       <div class="caption">
         Հարսանեկան ընդունելություն — 17:30,<br>
         <a href="https://goo.gl/maps/N4NYoMEf1AsWNGPB6" target="_blank">Morena Hall</a><br>
@@ -181,20 +278,23 @@
   </div>
 
   <script>
-    const startDayOfWeek = 3;
+    const startDayOfWeek = 3; // Հոկտեմբերի 1-ը՝ չորեքշաբթի
     const daysInMonth = 31;
     const favoriteDay = 8;
     const calendarDiv = document.getElementById('calendar');
 
+    // Դատարկ բջիջներ մինչև ամսվա առաջին օրը
     for (let i = 0; i < startDayOfWeek; i++) {
       const emptyCell = document.createElement('div');
       emptyCell.className = 'day empty';
       calendarDiv.appendChild(emptyCell);
     }
 
+    // Ամսվա օրերը՝ անիմացիայի համար i արժեքով
     for (let day = 1; day <= daysInMonth; day++) {
       const dayDiv = document.createElement('div');
       dayDiv.className = 'day';
+      dayDiv.style.setProperty('--i', day);
 
       if (day === favoriteDay) {
         dayDiv.classList.add('heart-day');
@@ -204,5 +304,6 @@
       calendarDiv.appendChild(dayDiv);
     }
   </script>
+
 </body>
 </html>
